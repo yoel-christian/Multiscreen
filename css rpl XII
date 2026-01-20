@@ -1,0 +1,25 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.box {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+video, iframe {
+    width: 100%;
+    height: 200px;
+}
+
+/* FOTO TIDAK GEPENG */
+img {
+    width: 100%;
+    height: auto;        /* menjaga rasio */
+    max-height: 300px;   /* batas tinggi */
+    object-fit: contain; /* tidak terdistorsi */
+    display: block;
+    margin: auto;
+}

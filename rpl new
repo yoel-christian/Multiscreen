@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MultiHandle</title>
+
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .box {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        video, iframe {
+            width: 100%;
+            height: 200px;
+        }
+
+        /* FOTO TIDAK GEPENG */
+        img {
+            width: 100%;
+            height: auto;        /* menjaga rasio */
+            max-height: 300px;   /* batas tinggi */
+            object-fit: contain; /* tidak terdistorsi */
+            display: block;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>MultiHandle</h2>
+
+<div class="container">
+
+    <!-- VIDEO -->
+    <div class="box">
+        <h3>Video</h3>
+        <input type="file" accept="video/*" onchange="bukaVideo(this.files[0])">
+        <p><a id="videoLink" target="_blank">Buka Video</a></p>
+        <video id="video" controls></video>
+    </div>
+
+    <!-- FILE -->
+    <div class="box">
+        <h3>File</h3>
+        <input type="file" onchange="bukaFile(this.files[0])">
+        <p><a id="fileLink" target="_blank">Buka File</a></p>
+        <iframe id="filePreview"></iframe>
+    </div>
+
+    <!-- FOTO -->
+    <div class="box">
+        <h3>Foto</h3>
+        <input type="file" accept="image/*" onchange="bukaFoto(this.files[0])">
+        <p><a id="fotoLink" target="_blank">Buka Foto</a></p>
+        <img id="foto">
+    </div>
+
+    <!-- CATATAN -->
+    <div class="box">
+        <h3>Catatan</h3>
+        <textarea rows="6" cols="30"
+                  placeholder="Tulis catatan..."></textarea>
+    </div>
+
+</div>
+
+<script>
+// VIDEO
+function bukaVideo(file) {
+    let url = URL.createObjectURL(file);
+    video.src = url;
+    videoLink.href = url;
+    videoLink.innerText = "Buka: " + file.name;
+}
+
+// FOTO
+function bukaFoto(file) {
+    let url = URL.createObjectURL(file);
+    foto.src = url;
+    fotoLink.href = url;
+    fotoLink.innerText = "Buka: " + file.name;
+}
+
+// FILE
+function bukaFile(file) {
+    let url = URL.createObjectURL(file);
+    fileLink.href = url;
+    fileLink.innerText = "Buka: " + file.name;
+
+    filePreview.src = "";
+
+    if (file.type === "application/pdf") {
+        filePreview.src = url;
+    } 
+    else if (
+        file.name.endsWith(".docx") ||
+        file.name.endsWith(".pptx") ||
+        file.name.endsWith(".xlsx")
+    ) {
+        filePreview.src =
+          "https://docs.google.com/gview?url=" + url + "&embedded=true";
+    } 
+    else {
+        filePreview.srcdoc = "Preview tidak tersedia.<br>Gunakan tombol Buka File.";
+    }
+}
+</script>
+
+</body>
+</html>

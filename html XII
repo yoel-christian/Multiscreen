@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MultiHandle</title>
+
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .box {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        video, iframe {
+            width: 100%;
+            height: 200px;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: contain;
+            display: block;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>MultiHandle</h2>
+
+<div class="container">
+
+    <div class="box">
+        <h3>Video</h3>
+        <input type="file" accept="video/*">
+        <p><a target="_blank">Buka Video</a></p>
+        <video controls></video>
+    </div>
+
+    <div class="box">
+        <h3>File</h3>
+        <input type="file">
+        <p><a target="_blank">Buka File</a></p>
+        <iframe></iframe>
+    </div>
+
+    <div class="box">
+        <h3>Foto</h3>
+        <input type="file" accept="image/*">
+        <p><a target="_blank">Buka Foto</a></p>
+        <img>
+    </div>
+
+    <div class="box">
+        <h3>Catatan</h3>
+        <textarea rows="6" cols="30" placeholder="Tulis catatan..."></textarea>
+    </div>
+
+</div>
+
+</body>
+</html>
